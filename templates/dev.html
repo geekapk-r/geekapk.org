@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- Source: https://gitlab.com/FuckBilibili/FuckBilibili -->
+<!-- Join now! https://t.me/geekapk -->
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <title>GeekApk Devs</title>
+
+    <meta property="og:title" content="GeekApk 开发人员文档">
+    <meta name="description" content="帮助 GeekApk 变得更好！">
+    <meta property="og:description" content="GeekApk 用户、包维护者、插件开发等文档集合">
+    <link rel="canonical" href="https://geekapk.org/">
+    <meta property="og:url" content="https://geekapk.org/dev/">
+    <meta property="og:site_name" content="GeekApk Project">
+    <meta property="og:image" content="https://geekapk.org/favicon.png">
+
+    <style type="text/css" media="screen">
+        body {
+            background-color: #f1f1f1;
+            margin: 10%;
+            font-weight: bold;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+
+    <!-- Matomo -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//piwik.geekapk.org/piwik/";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', '4']);
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'piwik.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
+    <script src="https://geekapk.org/geekstyle.js"></script>
+
+    <script>
+        if (localStorage['colorInf'] != null) {
+          document.styleSheets[0].cssRules[0].style.color = localStorage['colorInf'];
+        }
+        if (localStorage['colorPrimary'] != null)
+          document.styleSheets[0].cssRules[0].style.backgroundColor = localStorage['colorPrimary'];
+        if (shouldApplyDarkStyle()) {
+            document.styleSheets[0].cssRules[0].style.backgroundColor = 'black';
+            document.styleSheets[0].cssRules[0].style.color = 'white'
+        }
+    </script>
+</head>
+
+<body>
+    <a href="https://geekapk.org">
+        <img alt="Funny" src="https://statics.geekapk.org/funny.png" width="20%" height="20%" />
+    </a>
+    <div>Constructuring...</div>
+</body>
+
+</html>

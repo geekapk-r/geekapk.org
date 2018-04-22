@@ -1,0 +1,13 @@
+// License AGPL-3.0
+// Copyright(C) 2018 duangsuse
+// GeekApk.org style helper
+
+// should use dark style from 19:00 to 6:00
+function shouldApplyDarkStyle() {
+  if (localStorage['night'] == 'false')
+    return false;
+  var dh = new Date();
+  nightBegin = localStorage['nightBegin'] || 19
+  nightEnd = localStorage['nightEnd'] || 6
+  return dh.getHours() >= nightBegin && dh.getHours() <= nightEnd
+}

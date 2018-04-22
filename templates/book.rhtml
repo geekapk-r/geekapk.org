@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+  <title>The Book of GeekApk</title>
+
+  <meta property="og:title" content="GeekApk EasterEgg">
+  <meta name="description" content="The book of GeekApk">
+  <meta property="og:description" content="Funny easter-egg">
+  <link rel="canonical" href="https://geekapk.org/">
+  <meta property="og:url" content="https://geekapk.org/about/book.html">
+  <meta property="og:site_name" content="GeekApk Project">
+  <meta property="og:image" content="https://geekapk.org/favicon.png">
+
+  <style>
+    html {
+      background: #009788;
+      color: #fff;
+      font-style: italic
+    }
+
+    .geetext {
+      font-family: serif;
+      font-size: 1.1em;
+      line-height: 1.5;
+      margin-top: 15%;
+      text-align: center
+    }
+
+    .from {
+      font-family: serif;
+      font-size: 1.95em;
+      text-align: right
+    }
+
+    em {
+      font-size: 1.3em;
+      line-height: 0
+    }
+
+    .f {
+      padding-left: .2ex
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none
+    }
+  </style>
+
+  <script src="https://geekapk.org/geekstyle.js"></script>
+  <script>
+    document.styleSheets[0].cssRules[0].style.color = localStorage['colorPrimary'] || '#009788';
+    if (shouldApplyDarkStyle()) {
+      document.styleSheets[0].cssRules[0].style.color = 'black';
+    }
+  </script>
+</head>
+<%
+  paras = bok.split '----------'
+  def get_from(s)
+    s.split('---')[1]
+  end
+  def get_body(s)
+    s.split('---')[0].split('!!!')[1]
+  end
+  def get_head(s)
+    s.split('---')[0].split('!!!')[0]
+  end
+%>
+<body><%=
+  buf = ''
+  paras.each do |p|
+    buf += "\n  <!-- #{get_head(p).strip} -->\n"
+    buf += "  <p class=\"geetext\">#{get_body(p).strip}</p>\n"
+    buf += "  <p class=\"from\">#{get_from(p).strip}</p>\n"
+  end;buf
+%></body>
+
+</html>

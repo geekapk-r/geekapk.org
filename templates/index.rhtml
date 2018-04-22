@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<!-- Naive homepage -->
+
+<head>
+    <title>GeekApk 应用社区</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="theme-color" content="#009788">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta property="og:title" content="GeekApk 应用社区">
+    <meta name="description" content="自由的应用市场">
+    <meta property="og:description" content="Cool as CoolApk, Free as AUR">
+    <link rel="canonical" href="https://geekapk.org/">
+    <meta property="og:url" content="https://geekapk.org/">
+    <meta property="og:site_name" content="GeekApk Project">
+    <meta property="og:image" content="https://geekapk.org/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.0/css/mdui.min.css">
+    <link rel="icon" href="https://geekapk.org/favicon.png" />
+    <link rel="shortcut icon" href="https://geekapk.org/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.0/js/mdui.min.js"></script>
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #009788;
+            color: white;
+            padding: 2%;
+            font-weight: 900;
+        }
+
+        .github-corner {
+            border-bottom: 0;
+            position: fixed;
+            right: 0;
+            text-decoration: none;
+            top: 0;
+            z-index: 1
+        }
+
+        .github-corner svg {
+            color: #fff;
+            fill: #42b983;
+            fill: var(--theme-color, #42b983);
+            height: 80px;
+            width: 80px
+        }
+
+        .rotateanim:active {
+            -webkit-animation: a .56s ease-in-out;
+            animation: a .56s ease-in-out
+        }
+
+        .github-corner:hover .octo-arm {
+            -webkit-animation: a .56s ease-in-out;
+            animation: a .56s ease-in-out
+        }
+
+        @-webkit-keyframes a {
+            0%,
+            to {
+                -webkit-transform: rotate(0);
+                transform: rotate(0)
+            }
+
+            20%,
+            60% {
+                -webkit-transform: rotate(-25deg);
+                transform: rotate(-25deg)
+            }
+
+            40%,
+            80% {
+                -webkit-transform: rotate(10deg);
+                transform: rotate(10deg)
+            }
+        }
+
+        @keyframes a {
+            0%,
+            to {
+                -webkit-transform: rotate(0);
+                transform: rotate(0)
+            }
+
+            20%,
+            60% {
+                -webkit-transform: rotate(-25deg);
+                transform: rotate(-25deg)
+            }
+
+            40%,
+            80% {
+                -webkit-transform: rotate(10deg);
+                transform: rotate(10deg)
+            }
+        }
+    </style>
+
+    <!-- Matomo -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//piwik.geekapk.org/piwik/";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'piwik.js';
+            s.parentNode.insertBefore(g, s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+
+    <script src="https://geekapk.org/geekstyle.js"></script>
+
+    <!-- delaunay copied from https://crystal-lang.org/ -->
+    <script>
+        function getRandomColor() {
+            return (function (m, s, c) {
+                return (c ? arguments.callee(m, s, c - 1) : '#') +
+                    s[m.floor(m.random() * 16)]
+            })(Math, '0123456789abcdef', 5)
+        }
+
+        function styleupbg(color) {
+            document.styleSheets[1].cssRules[0].style['background-color'] = color;
+        }
+
+        function styleupgh(color) {
+            document.styleSheets[1].cssRules[2].style.fill = color;
+        }
+
+        function styleupbtn() {
+            b = document.getElementsByClassName('mdui-text-color-teal');
+            for (i in [0, 0]) {
+                b[0].classList.remove('mdui-text-color-teal');
+            }
+        }
+
+        $(function () {
+            line_color = 'white'
+            line_width = 1
+            if ($('#delaunay').length > 0) {
+                var canvas = d3.select("#delaunay").append("canvas");
+
+                function draw() {
+                    var width = $(window).width() - $(window).width() * 0.04,
+                        height = $('.header-section').height() + $('nav').height() + 0.3 * $(window).width(),
+                        τ = 2 * Math.PI,
+                        gravity = .005;
+
+                    var sample = poissonDiscSampler(width, height, 100),
+                        nodes = [{
+                            x: 0,
+                            y: 0
+                        }],
+                        s;
+
+                    while (s = sample()) nodes.push(s);
+
+                    var voronoi = d3.geom.voronoi()
+                        .x(function (d) {
+                            return d.x;
+                        })
+                        .y(function (d) {
+                            return d.y;
+                        });
+
+                    var links = voronoi.links(nodes);
+
+                    canvas
+                        .attr("width", width)
+                        .attr("height", height)
+                        .attr("class", "delaunay")
+                        .attr("style", "left:2%;bottom:0px; position:absolute;z-index:-1;")
+
+                    var context = canvas.node().getContext("2d");
+
+                    for (var i = 0, n = nodes.length; i < n; ++i) {
+                        var node = nodes[i];
+                        node.y += (node.cy - node.y) * gravity;
+                        node.x += (node.cx - node.x) * gravity;
+                    }
+
+                    context.clearRect(0, 0, width, height);
+
+                    context.beginPath();
+                    for (var i = 0, n = links.length; i < n; ++i) {
+                        var link = links[i];
+                        context.moveTo(link.source.x, link.source.y);
+                        context.lineTo(link.target.x, link.target.y);
+                    }
+                    context.lineWidth = line_width;
+                    context.strokeStyle = line_color;
+                    context.stroke();
+
+                    context.beginPath();
+                    for (var i = 0, n = nodes.length; i < n; ++i) {
+                        var node = nodes[i];
+                        context.moveTo(node.x, node.y);
+                        context.arc(node.x, node.y, 2.5, 2.5, 90);
+                    }
+                    context.lineWidth = 3;
+                    context.strokeStyle = "#FFFFFF";
+                    context.stroke();
+                    context.fillStyle = getRandomColor();
+                    context.fill();
+                }
+
+                // Based on https://www.jasondavies.com/poisson-disc/
+                function poissonDiscSampler(width, height, radius) {
+                    var k = 30, // maximum number of samples before rejection
+                        radius2 = radius * radius,
+                        R = 3 * radius2,
+                        cellSize = radius * Math.SQRT1_2,
+                        gridWidth = Math.ceil(width / cellSize),
+                        gridHeight = Math.ceil(height / cellSize),
+                        grid = new Array(gridWidth * gridHeight),
+                        queue = [],
+                        queueSize = 0,
+                        sampleSize = 0;
+
+                    return function () {
+                        if (!sampleSize) return sample(Math.random() * width, Math.random() * height);
+
+                        // Pick a random existing sample and remove it from the queue.
+                        while (queueSize) {
+                            var i = Math.random() * queueSize | 0,
+                                s = queue[i];
+
+                            // Make a new candidate between [radius, 2 * radius] from the existing sample.
+                            for (var j = 0; j < k; ++j) {
+                                var a = 2 * Math.PI * Math.random(),
+                                    r = Math.sqrt(Math.random() * R + radius2),
+                                    x = s.x + r * Math.cos(a),
+                                    y = s.y + r * Math.sin(a);
+
+                                // Reject candidates that are outside the allowed extent,
+                                // or closer than 2 * radius to any existing sample.
+                                if (0 <= x && x < width && 0 <= y && y < height && far(x, y)) return sample(
+                                    x, y);
+                            }
+
+                            queue[i] = queue[--queueSize];
+                            queue.length = queueSize;
+                        }
+                    };
+
+                    function far(x, y) {
+                        var i = x / cellSize | 0,
+                            j = y / cellSize | 0,
+                            i0 = Math.max(i - 2, 0),
+                            j0 = Math.max(j - 2, 0),
+                            i1 = Math.min(i + 3, gridWidth),
+                            j1 = Math.min(j + 3, gridHeight);
+
+                        for (j = j0; j < j1; ++j) {
+                            var o = j * gridWidth;
+                            for (i = i0; i < i1; ++i) {
+                                if (s = grid[o + i]) {
+                                    var s,
+                                        dx = s.x - x,
+                                        dy = s.y - y;
+                                    if (dx * dx + dy * dy < radius2) return false;
+                                }
+                            }
+                        }
+
+                        return true;
+                    }
+
+                    function sample(x, y) {
+                        var s = {
+                            x: x,
+                            y: y,
+                            cx: x,
+                            cy: y
+                        };
+                        queue.push(s);
+                        grid[gridWidth * (y / cellSize | 0) + (x / cellSize | 0)] = s;
+                        ++sampleSize;
+                        ++queueSize;
+                        return s;
+                    }
+                }
+
+                draw();
+
+                var interval;
+                window.addEventListener('resize', function () {
+                    window.clearInterval(interval);
+                    interval = window.setInterval(function () {
+                        draw();
+                        window.clearInterval(interval);
+                    }, 30);
+                });
+                bot = document.getElementById('robot');
+                bot.onclick = function () {
+                    draw();
+                    console.log("Delaunay drawed.")
+                }
+                bot.ondragend = function () {
+                    canvas.remove();
+                    console.log("Bye-bye! ;-)");
+                    bot.onclick = null
+                }
+                if (localStorage['colorPrimary'] != null)
+                  styleupbg(localStorage['colorPrimary']);
+                if (localStorage['colorFab'] != null)
+                  styleupgh(localStorage['colorFab']);
+
+                if (shouldApplyDarkStyle()) {
+                    styleupbg('black');
+                    styleupgh('grey');
+                    styleupbtn();
+                    console.log("Night mode")
+                }
+            }
+        });
+    </script>
+</head>
+
+<body scroll="no" style="overflow-x:hidden;overflow-y:hidden">
+    <a href="https://github.com/geekapk" class="github-corner header-section" aria-label="View organize on Github">
+        <svg viewBox="0 0 250 250" aria-hidden="true">
+            <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+            <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+            <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                fill="currentColor" class="octo-body"></path>
+        </svg>
+    </a>
+    <nav class="mdui-toolbar mdui-color-theme">
+        <a id="robot" class="rotateanim mdui-btn mdui-icon-left">
+            <i class="mdui-icon material-icons">android</i>
+            <a class="mdui-hidden-xs">GEEKAPK</a>
+        </a>
+        <div class="mdui-toolbar-spacer"></div>
+        <a href="https://wiki.geekapk.org" class="mdui-btn mdui-color-white mdui-shadow-0 mdui-text-color-teal mdui-btn-raised mdui-ripple mdui-hidden-xs">
+            <i class="mdui-icon material-icons">book</i>Wiki</button>
+            <a href="https://geekapk.org/web" class="mdui-btn mdui-btn-raised mdui-shadow-0 mdui-ripple mdui-hidden-xs">
+                <i class="mdui-icon material-icons">web</i>Web</a>
+            <a href="https://geekapk.org/dev" class="mdui-btn mdui-btn-raised mdui-shadow-0 mdui-ripple">
+                <i class="mdui-icon material-icons">developer_mode</i>Docs</a>
+            <a href="https://news.geekapk.org" class="mdui-btn mdui-btn-raised mdui-shadow-0 mdui-ripple mdui-hidden-xs">
+                <i class="mdui-icon material-icons">assistant_photo</i>News</a>
+            <a href="https://status.geekapk.org" class="mdui-btn mdui-btn-raised mdui-shadow-0 mdui-ripple">
+                <i class="mdui-icon material-icons">check</i>Status</a>
+            <a href="https://geekapk.org/about" class="mdui-btn mdui-btn-raised mdui-shadow-0 mdui-ripple mdui-hidden-xs">
+                <i class="mdui-icon material-icons">local_florist</i>About</a>
+    </nav>
+    <h1 align="center" class="mdui-typo-display-4 mdui-hidden-xs">GeekApk</h1>
+    <h1 align="center" class="mdui-typo-display-2">纯净的应用社区</h1>
+    <div align="center">
+        <a href="https://geekapk.org/about" class="mdui-btn mdui-btn-raised mdui-color-white mdui-ripple mdui-ripple-green">我们的故事</a>
+        <a href="https://wiki.geekapk.org" class="mdui-btn mdui-btn-raised mdui-color-white mdui-ripple mdui-ripple-yellow">应用 Wiki</a>
+        <a href="https://geekapk.org/web" class="mdui-btn mdui-btn-raised mdui-color-white mdui-text-color-teal">加入社区</a>
+    </div>
+    <button class="mdui-fab mdui-color-white mdui-fab-fixed mdui-ripple" mdui-dialog="{target: '#dialog-clients'}" mdui-tooltip="{content: '获取客户端'}"><i class="mdui-icon material-icons">get_app</i></button>
+    <div class="mdui-dialog" id="dialog-clients">
+      <div class="mdui-dialog-title">积极维护中的 GeekApk 客户端</div>
+      <div class="mdui-dialog-content">GeekApk 是一个开放、自由的应用市场。她的后端只提供 API，爱好者们使用 GeekApk 的开放 API 为她编写易于使用的客户端程序</div>
+      <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+        <button class="mdui-btn mdui-ripple">Gee (Java Android client)</button>
+        <button class="mdui-btn mdui-ripple">Gaee (Ruby API library and cli client)</button>
+      </div>
+    </div>
+    <div id="delaunay"></div>
+</body>
