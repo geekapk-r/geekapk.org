@@ -4,7 +4,7 @@
 
 // should use dark style from 19:00 to 6:00
 function shouldApplyDarkStyle() {
-  if (localStorage['night'] == 'false')
+  if (localStorage['night'] == false.toString())
     return false;
   var dh = new Date();
   nightBegin = localStorage['nightBegin'] || 19

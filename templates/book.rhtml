@@ -1,81 +1,72 @@
 <!DOCTYPE html>
+<!-- From the book of Mozilla -->
+
 <html lang="zh-CN" dir="ltr">
+  <head>
+    <!-- MDUI Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.1/css/mdui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
 
-<head>
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <title>The Book of GeekApk</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <title>#{TEXT['title']}</title>
 
-  <meta property="og:title" content="GeekApk EasterEgg">
-  <meta name="description" content="The book of GeekApk">
-  <meta property="og:description" content="Funny easter-egg">
-  <link rel="canonical" href="https://geekapk.org/">
-  <meta property="og:url" content="https://geekapk.org/about/book.html">
-  <meta property="og:site_name" content="GeekApk Project">
-  <meta property="og:image" content="https://geekapk.org/favicon.png">
+    <!-- theme -->
+    <meta name="theme-color" content="#009688">
+    <link rel="icon" type="image/png" href="#{TEXT['ic_sym']}">
+    <link rel="shortcut icon" type="image/png" href="#{TEXT['ic_sym']}">
+    <link rel="fluid-icon" href="#{TEXT['ic']}" title="GeekApk">
 
-  <style>
-    html {
-      background: #009788;
-      color: #fff;
-      font-style: italic
-    }
+    <!-- Begin SEO Tags -->
+    <meta property="og:title" content="#{TEXT['og_title']}">
+    <meta name="description" content="#{TEXT['og_desc']}">
+    <meta property="og:url" content="#{TEXT['url']}">
+    <meta property="og:site_name" content="#{TEXT['project']}">
+    <meta property="og:image" content="#{TEXT['ic_sym']}">
 
-    .geetext {
-      font-family: serif;
-      font-size: 1.1em;
-      line-height: 1.5;
-      margin-top: 15%;
-      text-align: center
-    }
+    <style>
+      html {
+        font-style: italic
+      }
 
-    .from {
-      font-family: serif;
-      font-size: 1.95em;
-      text-align: right
-    }
+      .geetext {
+        font-family: serif;
+        font-size: 1.1em;
+        line-height: 1.5;
+        margin-top: 15%;
+        text-align: center
+      }
 
-    em {
-      font-size: 1.3em;
-      line-height: 0
-    }
+      .from {
+        font-family: serif;
+        font-size: 1.95em;
+        text-align: right
+      }
 
-    .f {
-      padding-left: .2ex
-    }
+      em {
+        font-size: 1.3em;
+        line-height: 0
+      }
 
-    a {
-      color: #fff;
-      text-decoration: none
-    }
-  </style>
+      .f {
+        padding-left: .2ex
+      }
 
-  <script src="https://geekapk.org/geekstyle.js"></script>
-  <script>
-    document.styleSheets[0].cssRules[0].style.color = localStorage['colorPrimary'] || '#009788';
-    if (shouldApplyDarkStyle()) {
-      document.styleSheets[0].cssRules[0].style.color = 'black';
-    }
-  </script>
-</head>
-<%
-  paras = bok.split '----------'
-  def get_from(s)
-    s.split('---')[1]
-  end
-  def get_body(s)
-    s.split('---')[0].split('!!!')[1]
-  end
-  def get_head(s)
-    s.split('---')[0].split('!!!')[0]
-  end
-%>
-<body><%=
-  buf = ''
-  paras.each do |p|
-    buf += "\n  <!-- #{get_head(p).strip} -->\n"
-    buf += "  <p class=\"geetext\">#{get_body(p).strip}</p>\n"
-    buf += "  <p class=\"from\">#{get_from(p).strip}</p>\n"
-  end;buf
-%></body>
+      a {
+        color: #fff;
+        text-decoration: none
+      }
+    </style>
 
+    <!-- geekstyle -->
+    <script src="https://geekapk.org/geekstyle.js"></script>
+  </head>
+
+  <body class="mdui-color-theme mdui-text-color-theme">
+    <% for p in TEXT['book'] %>
+    <p class="geetext"><%= p.text %></p>
+    <p class="from"><%= p.from %></p>
+    <% end %>
+  </body>
 </html>

@@ -10,5 +10,8 @@ insert_final_newline = true
 [*.html]
 indent_size = 4
 
+[*.rhtml]
+indent_size = 2
+
 [*.rb]
 indent_size = 2
