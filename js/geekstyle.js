@@ -16,11 +16,14 @@ function shouldApplyDarkStyle() {
   return dh.getHours() >= nightBegin && dh.getHours() <= nightEnd
 }
 
+MDUI_DARK_CLASS = 'mdui-theme-layout-dark'
+
 // call this to apply dark style automatically
 function autodark() {
-  if (shouldApplyDarkStyle()) {
-    var body = $$('body')[0]
-    var cls = body.classList
-    var cls.add('mdui-theme-layout-dark')
-  }
+  var body = $$('body')[0]
+  var cls = body.classList
+  if (shouldApplyDarkStyle())
+    cls.add(MDUI_DARK_CLASS)
+  else
+    cls.remove(MDUI_DARK_CLASS)
 }
