@@ -1,24 +1,5 @@
-function getRandomColor() {
-    return (function (m, s, c) {
-        return (c ? arguments.callee(m, s, c - 1) : '#') +
-            s[m.floor(m.random() * 16)]
-    })(Math, '0123456789abcdef', 5)
-}
-
-function styleupbg(color) {
-    document.styleSheets[1].cssRules[0].style['background-color'] = color;
-}
-
-function styleupgh(color) {
-    document.styleSheets[1].cssRules[2].style.fill = color;
-}
-
-function styleupbtn() {
-    b = document.getElementsByClassName('mdui-text-color-teal');
-    for (i in [0, 0]) {
-        b[0].classList.remove('mdui-text-color-teal');
-    }
-}
+// Copied form crystal-lang.org
+// License: Unknown
 
 $(function () {
     line_color = 'white'
@@ -84,15 +65,16 @@ $(function () {
                 context.arc(node.x, node.y, 2.5, 2.5, 90);
             }
             context.lineWidth = 3;
-            context.strokeStyle = "#FFFFFF";
+            context.strokeStyle = "white";
             context.stroke();
+            // Apply random color for node
             context.fillStyle = getRandomColor();
             context.fill();
         }
 
         // Based on https://www.jasondavies.com/poisson-disc/
         function poissonDiscSampler(width, height, radius) {
-            var k = 30, // maximum number of samples before rejection
+            var k = 30, // Maximum number of samples before rejection
                 radius2 = radius * radius,
                 R = 3 * radius2,
                 cellSize = radius * Math.SQRT1_2,
@@ -119,7 +101,7 @@ $(function () {
                             y = s.y + r * Math.sin(a);
 
                         // Reject candidates that are outside the allowed extent,
-                        // or closer than 2 * radius to any existing sample.
+                        // Or closer than 2 * radius to any existing sample.
                         if (0 <= x && x < width && 0 <= y && y < height && far(x, y)) return sample(
                             x, y);
                     }

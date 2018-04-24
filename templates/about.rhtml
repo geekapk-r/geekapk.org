@@ -2,73 +2,79 @@
 <!-- Source: https://gitlab.com/FuckBilibili/FuckBilibili -->
 
 <html lang="zh-CN" dir="ltr">
-  <head>
-    <!-- MDUI Library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.1/css/mdui.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
-    <title>#{TEXT['title']}</title>
+<head>
+  <!-- MDUI Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.1/css/mdui.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.1/js/mdui.min.js"></script>
 
-    <!-- theme -->
-    <meta name="theme-color" content="#009688">
-    <link rel="icon" type="image/png" href="#{TEXT['ic_sym']}">
-    <link rel="shortcut icon" type="image/png" href="#{TEXT['ic_sym']}">
-    <link rel="fluid-icon" href="#{TEXT['ic']}" title="GeekApk">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+  <title>#{TEXT['title']}</title>
 
-    <!-- Begin SEO Tags -->
-    <meta property="og:title" content="#{TEXT['og_title']}">
-    <meta name="description" content="#{TEXT['og_desc']}">
-    <meta property="og:url" content="#{TEXT['url']}">
-    <meta property="og:site_name" content="#{TEXT['project']}">
-    <meta property="og:image" content="#{TEXT['ic_sym']}">
+  <!-- Theme -->
+  <meta name="theme-color" content="#009688">
+  <link rel="icon" type="image/png" href="#{TEXT['ic_sym']}">
+  <link rel="shortcut icon" type="image/png" href="#{TEXT['ic_sym']}">
+  <link rel="fluid-icon" href="#{TEXT['ic']}" title="#{TEXT['og_title']}">
 
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      }
+  <!-- Begin SEO Tags -->
+  <meta property="og:title" content="#{TEXT['og_title']}">
+  <meta name="description" content="#{TEXT['og_desc']}">
+  <meta property="og:url" content="#{TEXT['url']}">
+  <meta property="og:site_name" content="#{TEXT['project']}">
+  <meta property="og:image" content="#{TEXT['ic_sym']}">
 
-      .container {
-        margin: 50px auto 40px auto;
-        width: 600px;
-        max-width: 80%;
-        text-align: center;
-      }
+  <style type="text/css" media="screen">
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
 
-      h1 {
-        width: 800px;
-        max-width: 100%;
-        left: -100px;
-        letter-spacing: -1px;
-        line-height: 60px;
-        font-size: 60px;
-        font-weight: 100;
-        margin: 0px 0 50px 0;
-        text-shadow: 0 1px 0 #fff;
-      }
+    .container {
+      margin: 50px auto 40px auto;
+      width: 600px;
+      max-width: 80%;
+      text-align: center;
+    }
 
-      p {
-        color: rgba(0, 0, 0, 0.5);
-        margin: 20px 0;
-        line-height: 1.6;
-      }
-    </style>
+    h1 {
+      width: 800px;
+      max-width: 100%;
+      left: -100px;
+      letter-spacing: -1px;
+      line-height: 60px;
+      font-size: 60px;
+      font-weight: 100;
+      margin: 0px 0 50px 0;
+      text-shadow: 0 1px 0 #fff;
+    }
 
-    <!-- geekstyle -->
-    <script src="#{TEXT['url']}geekstyle.js"></script>
-  </head>
+    p {
+      color: rgba(0, 0, 0, 0.5);
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+  </style>
 
-  <body class="mdui-color-theme">
-    <div class="container mdui-text-color-theme">
-      <h1><%= (about_text = TEXT['about_text']).shift %></h1>
+  <!-- GeekStyle -->
+  <script src="#{TEXT['url']}geekstyle.js"></script>
+</head>
 
-      <!-- content lines -->
-      <% for l in about_text.lines %>
-      <p><%= l.strip %></p>
+<body class="mdui-color-theme">
+  <div class="container mdui-text-color-theme">
+    <h1>
+      <%= (about_text = TEXT['about_text']).shift %>
+    </h1>
+
+    <!-- Content lines -->
+    <% for l in about_text.lines %>
+      <p>
+        <%= l.strip %>
+      </p>
       <% end %>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
