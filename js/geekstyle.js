@@ -11,3 +11,12 @@ function shouldApplyDarkStyle() {
   nightEnd = localStorage['nightEnd'] || 6
   return dh.getHours() >= nightBegin && dh.getHours() <= nightEnd
 }
+
+// call this to apply dark style automatically
+function autodark() {
+  if (shouldApplyDarkStyle()) {
+    body = $$('body')[0]
+    cls = body.classList
+    cls.add('mdui-theme-layout-dark')
+  }
+}
