@@ -20,7 +20,7 @@ MDUI_DARK_CLASS = 'mdui-theme-layout-dark'
 
 // call this to apply dark style automatically
 function autodark() {
-    var body = $$('body')[0]
+    var body = mdui.JQ('body')[0]
     var cls = body.classList
     if (shouldApplyDarkStyle())
         cls.add(MDUI_DARK_CLASS)
@@ -35,3 +35,6 @@ function getRandomColor() {
             s[m.floor(m.random() * 16)]
     })(Math, '0123456789abcdef', 5)
 }
+
+// chage location to url
+function r(url) { window.location = url }
