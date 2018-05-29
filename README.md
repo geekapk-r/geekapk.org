@@ -6,9 +6,11 @@
 
 GeekApk 的静态页面们, 它们是主页, 文档, etc.
 
+__由于项目前端缺乏活跃性，GeekApk 只得暂时使用简单的设计，主要项目为 GeekApk 后端 API 服务器和 Web 前端__
+
 目前, __geekapk.org__ 主页使用 [ERB](https://ruby-lang.org) 模板自动生成, [Travis CI](https://travis-ci.org) 自动部署到 [GitHub Pages](https://pages.github.com) 服务上.
 
-这些页面的内容会包含介绍, 下载链接, Web 版链接, 文档链接(到 GitHub 上的 Wiki) 等
+这些页面的内容会包含介绍, 下载链接, Web 版链接, 文档链接 (到 GitHub 上的 Wiki) 等
 
 __geekapk.org__ 实际上会被 [CloudFlare](https://cloudflare.com) 解析代理提速, 感谢这些公共项目的支持!
 
