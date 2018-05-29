@@ -104,20 +104,6 @@
     <script src="https://geekapk.org/js/geekstyle.js"></script>
     <!-- delaunay copied from https://crystal-lang.org/ -->
     <script src="https://geekapk.org/js/delaunay.js"></script>
-
-    <script>
-        bot = document.getElementById('robot');
-        bot.onclick = function () {
-            draw();
-            console.log("Delaunay drawed.")
-        }
-        bot.ondragend = function () {
-            canvas.remove();
-            console.log("Bye-bye! ;-)");
-            bot.onclick = null
-            bot.ondragend = null
-        }
-    </script>
 </head>
 
 <body scroll="no" style="overflow-x:hidden;overflow-y:hidden">
@@ -166,4 +152,17 @@
       </div>
     </div>
     <div id="delaunay"></div>
+    <script>
+        var robot = document.getElementById('robot');
+        robot.onclick = function () {
+            draw();
+            console.log("Delaunay drawed.")
+        }
+        robot.ondragend = function () {
+            canvas.remove();
+            console.log("Bye-bye! ;-)");
+            robot.onclick = null
+            robot.ondragend = null
+        }
+    </script>
 </body>
