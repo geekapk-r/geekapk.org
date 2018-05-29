@@ -1,6 +1,6 @@
 <h1 align="center">GeekApk Introduction 极安静态页面</h1>
 
-<p align="center"><a href="https://geekapk-r.github.io/geekapk.org/">预览</a> · <a href="https://geekapk.org">去极安网站看看</a> · <a href="https://status.geekapk.org">Status</a> · <a href="https://web.geekapk.org">Web</a></p>
+<p align="center"><a href="https://geekapk-r.github.io/geekapk.org/">预览</a> · <a href="https://geekapk.org">去极安网站看看</a> · <a href="https://status.geekapk.org">Status</a> · <a href="https://web.geekapk.org">Web</a> · <a href="https://t.me/geekapk_bot">Register</a></p>
 
 ## 介绍 | Introduction
 
