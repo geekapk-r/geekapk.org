@@ -3,6 +3,7 @@
 // GeekApk.org style helper
 
 // should use dark style from 19:00 to 6:00
+// should use dark style from 19:00 to 6:00
 function shouldApplyDarkStyle() {
     var conf = localStorage['night']
     if (conf != null) {
@@ -13,7 +14,7 @@ function shouldApplyDarkStyle() {
     var dh = new Date();
     var nightBegin = localStorage['nightBegin'] || 19
     var nightEnd = localStorage['nightEnd'] || 6
-    return dh.getHours() >= nightBegin && dh.getHours() <= nightEnd
+    return dh.getHours() >= nightBegin && dh.getHours() <= 24 || dh.getHours() <= nightEnd
 }
 
 MDUI_DARK_CLASS = 'mdui-theme-layout-dark'
@@ -37,4 +38,6 @@ function getRandomColor() {
 }
 
 // chage location to url
-function r(url) { window.location = url }
+function r(url) {
+    window.location = url
+}
